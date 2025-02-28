@@ -13,7 +13,7 @@
                 <p><i class="far fa-clock text-primary mr-2"></i>{{ course.duration }}</p>
               </div>
               <div class="d-flex justify-content-between">
-                <h5>${{ course.price }}</h5>
+                <h5>৳{{ course.price }}</h5>
                 <router-link :to="`/course/${course.id}`" class="btn btn-primary">View Course</router-link>
               </div>
             </div>
