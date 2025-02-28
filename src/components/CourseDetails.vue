@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>{{ course.title }}</h2>
-        <img :src="course.thumbnail" alt="Course Image" width="200" />
+        <img class="img-fluid" :src="'http://127.0.0.1:8000' + course.thumbnail" alt="Course Thumbnail" width="200" />
         <p>{{ course.description }}</p>
         <p>💰 দাম: {{ course.price }} টাকা</p>
 

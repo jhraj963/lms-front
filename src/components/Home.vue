@@ -1,29 +1,20 @@
 <template>
-  <!-- Courses Start -->
-  <div class="container-fluid py-5">
-    <div class="container py-5">
-      <div class="text-center mb-5">
-        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
-        <h1>Our Popular Courses</h1>
-      </div>
-      <div class="row">
-        <div v-for="course in courses" :key="course.id" class="col-lg-4 col-md-6 mb-4">
-          <div class="rounded overflow-hidden mb-2">
-            <img class="img-fluid" :src="course.thumbnail" alt="Course Image">
-            <div class="bg-secondary p-4">
-              <div class="d-flex justify-content-between mb-3">
-                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>{{ course.students }} Students</small>
-                <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>{{ course.duration }}</small>
+  <div class="container">
+    <div class="row">
+      <div v-for="course in courses" :key="course.id" class="col-lg-4 col-md-6 mb-4">
+        <div class="card">
+          <img class="card-img-top" :src="'http://127.0.0.1:8000' + course.thumbnail" alt="Course Thumbnail" />
+          <div class="card-content">
+            <h4 class="card-title">{{ course.title }}</h4>
+            <p class="card-description">{{ course.description }}</p>
+            <div class="card-footer">
+              <div class="d-flex justify-content-between">
+                <p><i class="fa fa-users text-primary mr-2"></i>{{ course.students }} Students</p>
+                <p><i class="far fa-clock text-primary mr-2"></i>{{ course.duration }}</p>
               </div>
-              <router-link :to="`/course/${course.id}`" class="h5 text-decoration-none text-white">
-                {{ course.title }}
-              </router-link>
-              <div class="border-top mt-4 pt-4">
-                <div class="d-flex justify-content-between">
-                  <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>{{ course.rating }} <small>({{
-                      course.reviews }})</small></h6>
-                  <h5 class="m-0">${{ course.price }}</h5>
-                </div>
+              <div class="d-flex justify-content-between">
+                <h5>${{ course.price }}</h5>
+                <router-link :to="`/course/${course.id}`" class="btn btn-primary">View Course</router-link>
               </div>
             </div>
           </div>
@@ -31,7 +22,6 @@
       </div>
     </div>
   </div>
-  <!-- Courses End -->
 </template>
 
 <script>
@@ -40,19 +30,92 @@ import axios from "axios";
 export default {
   data() {
     return {
-      courses: []
+      courses: [],
     };
   },
   created() {
-    axios.get("http://127.0.0.1:8000/api/courses").then(response => {
-      this.courses = response.data;
-    });
-  }
+    // Fetch the list of courses from the backend
+    axios
+      .get("http://127.0.0.1:8000/api/courses")
+      .then((response) => {
+        this.courses = response.data;
+      })
+      .catch((error) => {
+        console.error("Error fetching courses:", error);
+      });
+  },
 };
 </script>
 
 <style scoped>
-.text-white {
-  color: #fff !important;
+.container {
+  margin-top: 30px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card:hover {
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: #777;
+}
+
+.card-footer {
+  margin-top: 20px;
+}
+
+.card-footer .d-flex {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-footer .btn {
+  background-color: #3700ff;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.card-footer .btn:hover {
+  background-color: #00ff75;
+}
+
+.card-footer i {
+  margin-right: 5px;
+}
+
+.card-footer h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 </style>
