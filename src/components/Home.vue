@@ -27,7 +27,8 @@
     <div class="row">
       <div v-for="course in limitedCourses" :key="course.id" class="col-lg-4 col-md-6 mb-4">
         <div class="card">
-          <img class="card-img-top" :src="'http://127.0.0.1:8000' + course.thumbnail" alt="Course Thumbnail" />
+          <img class="card-img-top" :src="'https://weeblecode.com/lms/public' + course.thumbnail"
+            alt="Course Thumbnail" />
           <div class="card-content">
             <h4 class="card-title">{{ course.title }}</h4>
             <p class="card-description">{{ course.description }}</p>
@@ -69,7 +70,7 @@ export default {
   },
   created() {
     axios
-      .get("http://127.0.0.1:8000/api/courses")
+      .get("https://weeblecode.com/lms/public/api/courses")
       .then((response) => {
         this.courses = response.data;
       })

@@ -56,7 +56,7 @@ export default {
     methods: {
         async fetchLectures() {
             try {
-                const response = await axios.get(`http://localhost:8000/api/modules/${this.moduleId}/lectures`);
+                const response = await axios.get(`https://weeblecode.com/lms/public/api/modules/${this.moduleId}/lectures`);
                 this.lectures = response.data;
 
                 // Auto-select first lecture if available
@@ -88,7 +88,7 @@ export default {
             }
         },
         getPdfUrl(pdfPath) {
-            return `http://localhost:8000/storage/${pdfPath}`;
+            return `https://weeblecode.com/lms/storage/app/public/${pdfPath}`;
         }
     }
 };

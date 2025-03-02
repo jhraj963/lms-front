@@ -1,8 +1,8 @@
 <template>
     <div class="course-container">
         <h2 class="course-title">{{ course.title }}</h2>
-        <img class="course-thumbnail img-fluid" :src="'http://127.0.0.1:8000' + course.thumbnail" alt="Course Thumbnail"
-            width="200" />
+        <img class="course-thumbnail img-fluid" :src="'https://weeblecode.com/lms/public' + course.thumbnail"
+            alt="Course Thumbnail" width="200" />
         <p class="course-description">{{ course.description }}</p>
         <p class="course-price">💰 Price: {{ course.price }} Taka</p>
 
@@ -23,11 +23,11 @@ export default {
     },
     created() {
         const courseId = this.$route.params.id;
-        axios.get(`http://127.0.0.1:8000/api/courses/${courseId}`).then(response => {
+        axios.get(`https://weeblecode.com/lms/public/api/courses/${courseId}`).then(response => {
             this.course = response.data;
         });
 
-        axios.get(`http://127.0.0.1:8000/api/courses/${courseId}/modules`).then(response => {
+        axios.get(`https://weeblecode.com/lms/public/api/courses/${courseId}/modules`).then(response => {
             this.modules = response.data;
         });
     }
